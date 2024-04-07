@@ -1,0 +1,17 @@
+<div class="mainContainer">
+    <div class="flexCol">
+      <label for="">Termék neve</label>
+      <input name="product-name" [(ngModel)]="product.name" type="text" />
+      <label for="">Termék ára</label>
+      <input name="product-name" [(ngModel)]="product.price" type="number" />
+      <label for="">Termék darabszáma</label>
+      <input name="product-name" [(ngModel)]="product.quantity" type="number" />
+      <label for="">Termék képlinkje</label>
+      <input name="product-name" [(ngModel)]="product.photoUrl" type="text" />
+      <label for="">Termék leírása</label>
+      <input name="product-name" [(ngModel)]="product.description" type="text" />
+      <button [ngClass]="[isEditMode ? 'updateButton' : 'addButton']" (click)="!isEditMode ? addProduct() : updateProduct()" type="button">
+        {{ isEditMode ? "Termék módosítása" : "Termék hozzáadása" }}
+      </button>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+.flexCol {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // transition:opacity 3s ease-in;
+}
+
+
+
+input{
+    text-align: center;
+}
+
+.addButton {
+    background-color: blue;
+    border: none;
+    padding: 5px;
+}
+
+.updateButton {
+    background-color: rgb(198, 198, 34);
+    color: white;
+    border: none;
+    padding: 5px;
+}
+
+.mainContainer {
+    padding: 10px;
+    margin-top: 0;
+    background-color: rgba(221, 207, 207,0.8);
+    transition: opacity 1s ease-out;
+}
+
+.fade {
+    opacity: 0;
+}
+
+// @starting-style {
+//     .flexCol {
+//       opacity: 0;
+//     }
+// }

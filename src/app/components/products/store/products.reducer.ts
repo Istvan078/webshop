@@ -1,4 +1,4 @@
-import { createReducer, on } from '@ngrx/store';
+import { Action, createReducer, on } from '@ngrx/store';
 import { Product } from '../../../models/product.model';
 import * as ProductsActions from './products.actions';
 
@@ -9,9 +9,7 @@ export interface State {
 }
 
 const initialState: State = {
-  products: [
-    // new Product(1000, 'xyz', 'Alapértelmezett termék', 'Példa Termék', 10),
-  ],
+  products: [],
   error: "",
   loading: false
 };
@@ -27,16 +25,31 @@ export const productsReducer = createReducer(
   }),
   on(ProductsActions.GetProductSuccess, (state, action) => {
     console.log([...state.products, ...action.products])
-    console.log("Sikeres lekérés")
-    return { ...state, loading: false, error: "", products: [...state.products, ...action.products]}
+    console.log("Sikeres termékek lekérés")
+    return { ...state, loading: false, error: "",  products: [...action.products]}
   }),
   on(ProductsActions.AddProduct, (state, action) => {
     console.log(`termék hozz. elkezdődött`);
-    return { ...state, products: [...state.products, action.product] };
+    const copy = {...action.product}
+    return { ...state, products: [...state.products, copy] };
   }),
   on(ProductsActions.AddProductSuccess, (state, action) => {
     console.log(state)
     return {...state, error: "", products: [...action.products]}
+  }),
+  on(ProductsActions.editModeOn, (state) => {
+    return {...state}
+  }),
+  on(ProductsActions.updateProduct, (state, action) => {
+    console.log('SIKERES UPDATE')
+    // felülírja a régi értékeket az újjal
+    // régi objekt értékek: ...state.products[action.ind]
+    // új object értékek: ..action.product
+    const updatedProduct = {...state.products[action.product.number], ...action.product}
+    const updatedProducts = [...state.products];
+    // a tömbben is módosítjuk a módosított objektumot
+    updatedProducts[action.product.number] = updatedProduct
+    return {...state, products: updatedProducts}
   }),
   on(ProductsActions.deleteProduct, (state, action) => {
     console.log(`törlés elkezdődött`);
@@ -46,5 +59,10 @@ export const productsReducer = createReducer(
     console.log(state)
     console.log("SIKERES TÖRLÉS");
     return {...state, error: "" } 
-  })
+  }),
+  on(ProductsActions.clearError, (state) => ({...state, error: "", loading: false}))
 );
+
+// export function productsReducer(state: State, action: Action) {
+//   return _productsReducer(state, action)
+// }
