@@ -1,0 +1,11 @@
+<div class="products" *ngFor="let product of products">
+    <h4>{{product.name}}</h4>
+    <span>{{product.price}} Ft</span>
+    <p>{{product.description}}</p>
+    <p>Elérhető: {{product.quantity}} db</p>
+    <button (click)="deleteProduct(product)" type="button">Törlés</button>
+</div>
+
+<input name="product-name" [(ngModel)]="product.name" type="text">
+
+<button (click)="addProduct()" type="button">Termék hozzáadása</button>

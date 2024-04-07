@@ -1,0 +1,38 @@
+/* You can add global styles to this file, and also import other style files */
+
+// :host az aktuális komponensre vonatkozik
+// a dokumentum gyökéreleme
+:root {
+    --main-color: rgba(14, 14, 181, 0.7);
+    --nav-color: rgba(9, 9, 105, 0.8);
+    --nav-items-color: white
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    border: none;
+    background: green;
+    padding: 3px;
+    margin: 3px;
+    border-radius: 2px;
+}
+
+input {
+    background: rgba(17, 17, 177, 0.2);
+    border-radius: 5px;
+    margin: 3px;
+    padding: 3px
+}
+
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    
+}
+
