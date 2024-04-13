@@ -7,10 +7,16 @@
   --nav-color: rgba(9, 9, 105, 0.8);
   --nav-items-color: white;
   --error-color: rgba(234, 24, 24, 0.8);
+  --nav-hover-color: rgba(74, 69, 207, 0.8);
 }
 
 a {
   text-decoration: none;
+  cursor: pointer;
+}
+
+a:link, a:active, a:visited{
+  color: black;
 }
 
 button {

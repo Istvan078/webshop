@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "WebShop": {
+    "webshop": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "WebShop:build:production"
+              "buildTarget": "webshop:build:production"
             },
             "development": {
-              "buildTarget": "WebShop:build:development"
+              "buildTarget": "webshop:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "WebShop:build"
+            "buildTarget": "webshop:build"
           }
         },
         "test": {
@@ -101,11 +101,28 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "webshop:build:production",
+              "serveTarget": "webshop:serve:production"
+            },
+            "development": {
+              "buildTarget": "webshop:build:development",
+              "serveTarget": "webshop:serve:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
   },
   "cli": {
-    "analytics": "bbfcd6fe-3400-42cb-81bb-b0eff194251f"
+    "analytics": "cf3d89f0-6517-44f0-89c7-49da19c47358"
   }
 }

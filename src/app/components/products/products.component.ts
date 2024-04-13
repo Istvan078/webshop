@@ -6,6 +6,7 @@ import { Product } from '../../models/product.model';
 import { Observable, Subscription } from 'rxjs';
 import { BaseService } from '../../services/base.service';
 import { Router } from '@angular/router';
+import { ConfigService } from '../../services/config.service';
 
 @Component({
   selector: 'app-products',
@@ -16,56 +17,61 @@ export class ProductsComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   product: Product = new Product();
   isLoading: boolean = false;
+  searchStr: string = ""
+  categories: any[] = []
   error: string = '';
-  productsStoreSub!: Subscription
-  constructor(
-    private store: Store<fromApp.AppState>,
-    private router: Router
-  ) {}
-
+  productsStoreSub!: Subscription;
+  constructor(private store: Store<fromApp.AppState>, private router: Router, private config: ConfigService) {}
 
   ngOnInit(): void {
-    this.init()
-    this.fadeIn()
+    this.init();
+    this.fadeIn();
   }
 
   init() {
-    this.productsStoreSub = this.store.select('products').subscribe((productsState) => {
-      this.products = productsState.products;
-      this.isLoading = productsState.loading;
-      this.error = productsState.error;
-      if (this.error) {
-        this.showErrorAlert(this.error);
-      }
-    });
+    this.getCategories()
+    this.productsStoreSub = this.store
+      .select('products')
+      .subscribe((productsState) => {
+        this.products = productsState.products;
+        this.isLoading = productsState.loading;
+        this.error = productsState.error;
+        if (this.error) {
+          this.showErrorAlert(this.error);
+        }
+      });
     if (!this.products.length)
       this.store.dispatch(ProductsActions.getProduct());
   }
 
   fadeIn() {
-    const products = document.getElementsByClassName('products')
+    const products = document.getElementsByClassName('products');
     let index = 0;
     const interval = setInterval(() => {
-      if(index < products.length) {
+      if (index < products.length) {
         products[index].classList.add('fade-in');
         index++;
       } else {
-        clearInterval(interval)
+        clearInterval(interval);
       }
-    }, 500)
+    }, 500);
+  }
+
+  getCategories() {
+   this.categories = this.config.getCategories()
   }
 
   showErrorAlert(error: string = this.error) {
-    return error
+    return error;
   }
 
   editModeOn(prod: Product) {
-    document.querySelector('.mainContainer')?.classList.add('fade')
-    this.store.dispatch(ProductsActions.editModeOn(prod))
+    document.querySelector('.mainContainer')?.classList.add('fade');
+    this.store.dispatch(ProductsActions.editModeOn(prod));
   }
 
   clearError() {
-    this.store.dispatch(ProductsActions.clearError())
+    this.store.dispatch(ProductsActions.clearError());
   }
 
   deleteProduct(prod: Product) {
@@ -73,6 +79,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if(this.productsStoreSub) this.productsStoreSub.unsubscribe()
+    if (this.productsStoreSub) this.productsStoreSub.unsubscribe();
   }
 }

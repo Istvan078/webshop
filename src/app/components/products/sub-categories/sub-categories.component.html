@@ -1,0 +1,11 @@
+
+<nav class="sideNav">
+    <ng-container *ngIf="categories.length > 0 && subcategories.firstCategory.key">
+        <div *ngFor="let category of categories; let i=index">
+            <a (click)="toggle()">{{category.value}}</a>
+            <div *ngIf="category?.key === subcategories[category.key]?.key" class="subCategories">
+                <a [queryParams]="{subcategory: subcategories[category.key].queryPar[i]}" routerLink="" *ngFor="let subCat of subcategories[category.key].value; let i = index">{{subCat}}</a>
+            </div>
+        </div>
+    </ng-container>
+</nav>

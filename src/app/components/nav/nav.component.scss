@@ -1,9 +1,12 @@
 nav {
     background-color: var(--nav-color);
-    padding: 5px;
+    padding: 5px 5px 5px 0;
     a {
         color: var(--nav-items-color);
         padding: 5px;
         
+    }
+    a:hover {
+        background: var(--nav-hover-color);
     }
 }

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule} from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +17,7 @@ import { Environments } from './environments';
 import { EffectsModule } from '@ngrx/effects';
 import { ProductsEffects } from './components/products/store/products.effects';
 import { AdminComponent } from './components/admin/admin.component';
+import { SubCategoriesComponent } from './components/products/sub-categories/sub-categories.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AdminComponent } from './components/admin/admin.component';
     HomeComponent,
     ProductsComponent,
     NavComponent,
-    AdminComponent
+    AdminComponent,
+    SubCategoriesComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,8 @@ import { AdminComponent } from './components/admin/admin.component';
     AngularFireModule.initializeApp(Environments.firebaseConfig),
     AngularFireDatabaseModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

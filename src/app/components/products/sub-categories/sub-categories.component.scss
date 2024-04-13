@@ -1,0 +1,36 @@
+.sideNav {
+    border-radius: 0px 10px 10px 0px;
+    background-color: var(--nav-color);
+    width: fit-content;
+    display: grid;
+    margin-top: 20px;
+    color: var(--nav-items-color);
+    padding-left: 10px;
+    a{
+      padding: 0px;  
+    }
+    a:hover {
+        background-color: var(--nav-hover-color);
+    }
+}
+.subCategories {
+    font-size: 0.8rem;
+    display: grid;
+    margin: 0 0 0 3px;
+    background-color: goldenrod;
+    color: black;
+    
+    a{
+        width: fit-content;
+        margin:2px 10px 0px 0px;
+        padding: 0
+    }
+    a:last-child {
+        margin-bottom: 10px;
+    }
+}
+
+.d-none {
+    display: none;
+}
+
