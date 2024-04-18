@@ -16,6 +16,8 @@ export const GET_PRODUCT = '[Products] Get Products';
 export const GET_PRODUCT_SUCCESS = '[Products] Get Products Success';
 export const GET_PRODUCTS_FAIL = '[Products] Get Products Fail';
 
+export const ADD_TO_BASKET = '[Products] Add To Basket'
+
 export const CLEAR_ERROR = '[Products] Clear Error';
 
 export const AddProduct = createAction(
@@ -46,6 +48,8 @@ export const editModeOn = createAction(EDIT_MODE_ON, props<Product>())
 
 export const deleteProduct = createAction(DELETE_PRODUCT, props<Product>());
 export const deleteProductSuccess = createAction(DELETE_PRODUCT_SUCCESS);
+
+export const addToBasket = createAction(ADD_TO_BASKET, props<Product>())
 
 export const clearError = createAction(CLEAR_ERROR);
 

@@ -1,21 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../../../services/config.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-sub-categories',
   templateUrl: './sub-categories.component.html',
-  styleUrl: './sub-categories.component.scss'
+  styleUrl: './sub-categories.component.scss',
 })
-export class SubCategoriesComponent implements OnInit{
-  categories: any[] =[]
-  subcategories: any = {}
-  constructor(private config: ConfigService) {}
+export class SubCategoriesComponent implements OnInit {
+  categories: any[] = [];
+  subcategories: any = {};
+  catKey: string = '';
+  constructor(private config: ConfigService, private route: ActivatedRoute) {}
   ngOnInit(): void {
-    this.categories = this.config.getCategories()
-    this.subcategories = this.config.getSubCategories()
+    this.categories = this.config.getCategories();
+    this.subcategories = this.config.getSubCategories();
+    this.route.params.subscribe((cat: any) => {
+      if (!cat.cat) return;
+      const parArray = cat.cat.split('-');
+      this.catKey = parArray[0];
+    });
   }
 
-  toggle() {
-    document.querySelector('.subCategories')?.classList.toggle('d-none')
+  toggle(category: any, i: number) {
+    if (category === this.subcategories[category]?.key) {
+      const subcatAnchor = document.querySelectorAll('.subCategories');
+      subcatAnchor[i as number]?.classList?.toggle('d-none');
+    }
   }
 }

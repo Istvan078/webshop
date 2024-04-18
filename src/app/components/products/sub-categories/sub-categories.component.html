@@ -1,11 +1,48 @@
-
-<nav class="sideNav">
-    <ng-container *ngIf="categories.length > 0 && subcategories.firstCategory.key">
-        <div *ngFor="let category of categories; let i=index">
-            <a (click)="toggle()">{{category.value}}</a>
-            <div *ngIf="category?.key === subcategories[category.key]?.key" class="subCategories">
-                <a [queryParams]="{subcategory: subcategories[category.key].queryPar[i]}" routerLink="" *ngFor="let subCat of subcategories[category.key].value; let i = index">{{subCat}}</a>
-            </div>
+<div class="container">
+  <nav class="sideNav">
+    <ng-container
+      *ngIf="categories.length > 0 && subcategories.firstCategory.key"
+    >
+      <div
+        class="categories"
+        *ngFor="let category of categories; let i = index"
+      >
+        <a
+          [queryParams]="{
+            key: 'all-products',
+            queryPar: 'all-products'
+          }"
+          routerLink="/products"
+          style="display: block"
+          *ngIf="i === 0"
+          >Osszes Termek</a
+        >
+        <a (click)="toggle(category.key, i)">{{ category.value }}</a>
+        <div
+          *ngIf="
+            category?.key === subcategories[category.key]?.key ||
+            catKey === subcategories[category.key]?.key
+          "
+          class="subCategories"
+          [ngClass]="
+            catKey !== subcategories[category.key]?.key ? 'd-none' : ''
+          "
+        >
+          <a
+            class="subcatanchor"
+            [queryParams]="{
+              key: category.key,
+              queryPar: subcategories[category.key].queryPar[i]
+            }"
+            routerLink="/products"
+            *ngFor="
+              let subCat of subcategories[category.key].value;
+              let i = index
+            "
+            >{{ subCat }}</a
+          >
         </div>
+      </div>
     </ng-container>
-</nav>
+  </nav>
+</div>

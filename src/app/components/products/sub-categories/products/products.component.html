@@ -1,0 +1,34 @@
+<div class="mainContainer">
+  <div *ngIf="isLoading" class="loadingSpinner">*</div>
+  <ng-template [ngIf]="error">
+    <div class="errorContainer">
+      {{ this.showErrorAlert() }}
+      <button (click)="clearError()" type="button">Rendben</button>
+    </div>
+  </ng-template>
+  <ng-container *ngIf="products.length > 0">
+    <div class="products" *ngFor="let product of products">
+      <h4>{{ product.name }}</h4>
+      <div>
+        <img
+          *ngIf="product.photoUrl"
+          [src]="product.photoUrl"
+          [alt]="product.name"
+        />
+      </div>
+      <span *ngIf="product.price">{{ product.price }} Ft</span>
+      <p>{{ product.description }}</p>
+      <p *ngIf="product.quantity">Elérhető: {{ product.quantity }} db</p>
+      <div>
+        <button (click)="editModeOn(product)" type="button">Módosítás</button>
+        <button
+          class="deleteButton"
+          (click)="deleteProduct(product)"
+          type="button"
+        >
+          Törlés
+        </button>
+      </div>
+    </div>
+  </ng-container>
+</div>

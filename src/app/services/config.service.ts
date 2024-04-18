@@ -8,11 +8,10 @@ export class ConfigService {
     { key: 'firstCategory', value: 'Szépségápolás', link: 'beauty' },
     { key: 'secondCategory', value: 'Elektronika', link: 'electronics' },
     { key: 'thirdCategory', value: 'Kertészet', link: 'gardening' },
-    { key: '4thCategory', value: 'Háztartás', link: 'household' },
+    { key: 'fourthCategory', value: 'Háztartás', link: 'household' },
     { key: '5thCategory', value: 'Barkácsolás', link: 'tools' },
   ];
 
-  
   private subCategories: any = {
     firstCategory: {
       key: 'firstCategory',
@@ -65,8 +64,25 @@ export class ConfigService {
         'other-garden-tools',
       ],
     },
+    fourthCategory: {
+      key: 'fourthCategory',
+      value: [
+        'Sepruk',
+        'Tisztitoszerek',
+        'Mosogatoszerek',
+        'Mososzerek',
+        'Felmosok',
+      ],
+      queryPar: [
+        'brooms',
+        'cleaning-products',
+        'washing-up',
+        'washing products',
+        'mops',
+      ],
+    },
   };
-  ujobjektum = {...this.subCategories}
+  ujobjektum = { ...this.subCategories };
   constructor() {}
 
   getCategories() {

@@ -4,7 +4,7 @@ import { BrowserModule} from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import { ProductsComponent } from './components/products/products.component';
+import { ProductsComponent } from './components/products/sub-categories/products/products.component';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -18,6 +18,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { ProductsEffects } from './components/products/store/products.effects';
 import { AdminComponent } from './components/admin/admin.component';
 import { SubCategoriesComponent } from './components/products/sub-categories/sub-categories.component';
+import { OrderComponent } from './components/order/order.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SubCategoriesComponent } from './components/products/sub-categories/sub
     ProductsComponent,
     NavComponent,
     AdminComponent,
-    SubCategoriesComponent
+    SubCategoriesComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,

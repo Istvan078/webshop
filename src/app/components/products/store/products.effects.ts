@@ -35,6 +35,10 @@ export class ProductsEffects {
           newProduct.quantity = val[1].quantity;
           newProduct.photoUrl = val[1].photoUrl
           newProduct.number = i;
+          if(val[1].subcategory?.key)
+          newProduct.subcategory = val[1].subcategory
+          newProduct.featured = val[1].featured
+          newProduct.discount = val[1].discount
           // return arr.push({ ...val[1], key: val[0] });
           return arr.push(newProduct);
         });

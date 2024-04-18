@@ -1,1 +1,91 @@
+<div class="searchContainer">
+  <label for="">Termék keresése</label>
+  <input [(ngModel)]="searchStr" name="searchInput" type="text" />
+  <button (click)="searchProduct()" type="button">Kereses</button>
+</div>
 
+<div class="categoriesContainer">
+  <button
+    [routerLink]="['/subcategories/' + category.key + '-' + category.link]"
+    *ngFor="let category of categories"
+    type="button"
+  >
+    {{ category.value }}
+  </button>
+</div>
+
+<h2 style="text-align: center">KIEMELT AKCIOS TERMEKEK</h2>
+
+<div *ngIf="!isSearchOn" class="mainContainer">
+  <div *ngIf="isLoading" class="loadingSpinner">*</div>
+  <ng-template [ngIf]="error">
+    <div class="errorContainer">
+      {{ this.showErrorAlert() }}
+      <button (click)="clearError()" type="button">Rendben</button>
+    </div>
+  </ng-template>
+  <ng-container *ngFor="let product of products">
+    <ng-container *ngIf="product.featured && product.discount">
+      <div class="products">
+        <h4>{{ product.name }}</h4>
+        <h5>Akció: {{ product.discount }}%</h5>
+        <div class="imgContainer">
+          <img
+            *ngIf="product.photoUrl"
+            [src]="product.photoUrl"
+            [alt]="product.name"
+          />
+        </div>
+        <span *ngIf="product.price">{{ product.price }} Ft</span>
+        <p>{{ product.description }}</p>
+        <p *ngIf="product.quantity">Elérhető: {{ product.quantity }} db</p>
+        <button
+          class="toBasketButton"
+          (click)="toBasket(product)"
+          type="button"
+        >
+          Kosarba
+        </button>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>
+
+<div *ngIf="isSearchOn" class="mainContainer">
+  <div *ngIf="isLoading" class="loadingSpinner">*</div>
+  <ng-template [ngIf]="error">
+    <div class="errorContainer">
+      {{ this.showErrorAlert() }}
+      <button (click)="clearError()" type="button">Rendben</button>
+    </div>
+  </ng-template>
+  <ng-container *ngFor="let product of filteredProducts">
+    <div class="products">
+      <h4>{{ product.name }}</h4>
+      <h5>Akció: {{ product.discount }}%</h5>
+      <div class="imgContainer">
+        <img
+          *ngIf="product.photoUrl"
+          [src]="product.photoUrl"
+          [alt]="product.name"
+        />
+      </div>
+      <span *ngIf="product.price">{{ product.price }} Ft</span>
+      <p>{{ product.description }}</p>
+      <p *ngIf="product.quantity">Elérhető: {{ product.quantity }} db</p>
+    </div>
+  </ng-container>
+</div>
+
+<div [ngClass]="!isPutToBasket ? 'd-none' : ''" class="modal">
+  <button (click)="isPutToBasket = false" class="close-modal" type="button">
+    &times;
+  </button>
+  <h1>{{ product.name }}</h1>
+  <h3>{{ product.quantity }} db</h3>
+  <p>Sikeresen kosarba helyezve!</p>
+  <button (click)="isPutToBasket = false" type="button">
+    Folytatom a vasarlast
+  </button>
+</div>
+<div [ngClass]="!isPutToBasket ? 'd-none' : ''" class="overlay"></div>

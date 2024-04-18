@@ -1,17 +1,61 @@
 <div class="mainContainer">
-    <div class="flexCol">
-      <label for="">Termék neve</label>
-      <input name="product-name" [(ngModel)]="product.name" type="text" />
-      <label for="">Termék ára</label>
-      <input name="product-name" [(ngModel)]="product.price" type="number" />
-      <label for="">Termék darabszáma</label>
-      <input name="product-name" [(ngModel)]="product.quantity" type="number" />
-      <label for="">Termék képlinkje</label>
-      <input name="product-name" [(ngModel)]="product.photoUrl" type="text" />
-      <label for="">Termék leírása</label>
-      <input name="product-name" [(ngModel)]="product.description" type="text" />
-      <button [ngClass]="[isEditMode ? 'updateButton' : 'addButton']" (click)="!isEditMode ? addProduct() : updateProduct()" type="button">
-        {{ isEditMode ? "Termék módosítása" : "Termék hozzáadása" }}
-      </button>
-    </div>
+  <div class="flexCol">
+    <label for="">Termék neve</label>
+    <input name="product-name" [(ngModel)]="product.name" type="text" />
+    <label for="">Termék fokategoriája</label>
+    <ng-container>
+      <select (change)="selectedCat($event)" name="" id="">
+        <option value=""></option>
+        <option
+          *ngFor="let cat of categories; let i = index"
+          #catOption
+          [value]="cat.key"
+        >
+          {{ cat.value }}
+        </option>
+      </select>
+      <ng-container *ngIf="catKey">
+        <label for="">Termék alkategoriája</label>
+        <select
+          (change)="selectedSubCat($event)"
+          *ngIf="catKey === subcategories[catKey]?.key"
+          name="subcat"
+          id=""
+        >
+          <option value=""></option>
+          <option
+            *ngFor="let subcat of subcategories[catKey].value; let ind = index"
+            [value]="subcategories[catKey].queryPar[ind]"
+            name="product-subcat"
+          >
+            {{ subcat }}
+          </option>
+        </select>
+      </ng-container>
+    </ng-container>
+    <label for="">Termék ára</label>
+    <input name="product-name" [(ngModel)]="product.price" type="number" />
+    <label for="">Termék darabszáma</label>
+    <input name="product-name" [(ngModel)]="product.quantity" type="number" />
+    <label for="">Termék képlinkje</label>
+    <input name="product-name" [(ngModel)]="product.photoUrl" type="text" />
+    <label for="">Termék leírása</label>
+    <input name="product-name" [(ngModel)]="product.description" type="text" />
+    <label for="">Akcio merteke (ha van, %-ban)</label>
+    <input
+      placeholder="%"
+      name="product-name"
+      [(ngModel)]="product.discount"
+      type="number"
+    />
+    <label for="">Termék kiemelese</label>
+    <input name="product-name" [(ngModel)]="product.featured" type="checkbox" />
+    <button
+      [ngClass]="[isEditMode ? 'updateButton' : 'addButton']"
+      (click)="!isEditMode ? addProduct() : updateProduct()"
+      type="button"
+    >
+      {{ isEditMode ? "Termék módosítása" : "Termék hozzáadása" }}
+    </button>
+  </div>
 </div>
