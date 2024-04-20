@@ -6,6 +6,7 @@ import { Product } from '../../../../models/product.model';
 import { Observable, Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfigService } from '../../../../services/config.service';
+import deepmerge from 'deepmerge';
 
 @Component({
   selector: 'app-products',
@@ -20,6 +21,7 @@ export class ProductsComponent implements OnDestroy, OnInit {
   categories: any[] = [];
   error: string = '';
   productsStoreSub!: Subscription;
+  isPutToBasket: boolean = false;
   constructor(
     private store: Store<fromApp.AppState>,
     private router: Router,
@@ -44,8 +46,10 @@ export class ProductsComponent implements OnDestroy, OnInit {
           .subscribe((productsState) => {
             this.isLoading = productsState.loading;
             if (queryParams.done) return;
-            if (!queryParams.done || queryParams.queryPar === 'all-products')
+            if (!queryParams.done || queryParams.queryPar === 'all-products') {
               this.products = productsState.products;
+              this.products = deepmerge(this.products, []);
+            }
             this.error = productsState.error;
             if (this.error) {
               this.showErrorAlert(this.error);
@@ -56,10 +60,12 @@ export class ProductsComponent implements OnDestroy, OnInit {
               queryParams.queryPar !== 'all-products'
             ) {
               queryParams.done = true;
-              if (queryParams.queryPar)
+              if (queryParams.queryPar) {
                 this.products = this.products.filter(
                   (prod) => prod.subcategory.queryPar === queryParams.queryPar
                 );
+                this.products = deepmerge(this.products, []);
+              }
               res('**** TERMEKEK MEGSZURVE ****');
             } else if (this.products.length) {
               queryParams.done = true;
@@ -84,6 +90,17 @@ export class ProductsComponent implements OnDestroy, OnInit {
         clearInterval(interval);
       }
     }, 500);
+  }
+
+  toBasket(product: Product) {
+    this.isPutToBasket = true;
+    this.product = product;
+    console.log(this.product);
+    document.addEventListener('keydown', (e) => {
+      console.log(e, 'gombnyomas tortent');
+      if (e.key === 'Escape') this.isPutToBasket = false;
+    });
+    this.store.dispatch(ProductsActions.addToBasket(product));
   }
 
   getCategories() {

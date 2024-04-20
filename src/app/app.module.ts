@@ -19,6 +19,8 @@ import { ProductsEffects } from './components/products/store/products.effects';
 import { AdminComponent } from './components/admin/admin.component';
 import { SubCategoriesComponent } from './components/products/sub-categories/sub-categories.component';
 import { OrderComponent } from './components/order/order.component';
+import { SubmittedOrdersComponent } from './components/admin/submitted-orders/submitted-orders.component';
+import { OrderEffects } from './components/order/store/order.effects';
 
 @NgModule({
   declarations: [
@@ -28,14 +30,15 @@ import { OrderComponent } from './components/order/order.component';
     NavComponent,
     AdminComponent,
     SubCategoriesComponent,
-    OrderComponent
+    OrderComponent,
+    SubmittedOrdersComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     StoreModule.forRoot(appReducer),
-    EffectsModule.forRoot([ProductsEffects]),
+    EffectsModule.forRoot([ProductsEffects, OrderEffects]),
     StoreDevtoolsModule.instrument({logOnly: Environments.production}),
     StoreRouterConnectingModule.forRoot(),
     AngularFireModule.initializeApp(Environments.firebaseConfig),

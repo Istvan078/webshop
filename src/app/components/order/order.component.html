@@ -1,5 +1,172 @@
-<div *ngFor="let product of basket">
-  <h2>{{ product.name }}</h2>
-  <h3>{{ product.price }} Ft</h3>
-  <p>{{ product.quantity }} Db</p>
+<div
+  *ngIf="!isPersonalDetails && !isDelivDetails && !isFinalizeOrder"
+  class="mainContainer"
+>
+  <!-- <div *ngIf="isLoading" class="loadingSpinner">*</div>
+  <ng-template [ngIf]="error">
+    <div class="errorContainer">
+      {{ this.showErrorAlert() }}
+      <button (click)="clearError()" type="button">Rendben</button>
+    </div>
+  </ng-template> -->
+  <div class="products">
+    <h2 class="header-1">Kosár tartalma <i class="bi bi-cart4"></i></h2>
+    <ng-container *ngFor="let product of basket">
+      <div *ngIf="product.name">
+        <h4>{{ product.name }}</h4>
+        <span *ngIf="product.price">{{ product.price }} Ft</span>
+        <p *ngIf="product.orderQuantity">{{ product.orderQuantity }} db</p>
+        <button (click)="deleteProdFromCart(product)" type="button">
+          Törlés
+        </button>
+      </div>
+    </ng-container>
+    <button (click)="startOrder()" type="button">Megrendelés</button>
+  </div>
+</div>
+
+<div *ngIf="isPersonalDetails" class="orderContainer">
+  <form>
+    <fieldset>
+      <legend>Megrendelő adatai</legend>
+      <label for="">Vezetéknév</label>
+      <input [(ngModel)]="order.surName" name="surname" type="text" />
+      <label for="">Keresztnév</label>
+      <input [(ngModel)]="order.firstName" name="firstName" type="text" />
+      <div>
+        <label for="">Telefonszám</label>
+        <input
+          [(ngModel)]="order._personalDetails.phoneNumber"
+          name="surname"
+          type="text"
+        />
+        <label for="">E-mail</label>
+        <input
+          [(ngModel)]="order._personalDetails.email"
+          name="surname"
+          type="text"
+        />
+      </div>
+      <div>
+        <label for="address">Lakcím</label>
+        <input
+          [(ngModel)]="order._personalDetails.address"
+          name="address"
+          type="text"
+        />
+      </div>
+      <div class="forwardBtnCont">
+        <button
+          (click)="isPersonalDetails = false; isDelivDetails = true"
+          type="button"
+        >
+          Tovább
+        </button>
+      </div>
+    </fieldset>
+  </form>
+</div>
+
+<div *ngIf="isDelivDetails" class="orderContainer">
+  <form>
+    <fieldset>
+      <legend>Átvétel, fizetés módja</legend>
+      <label for="">Átvétel típusa </label>
+      <select
+        [(ngModel)]="order._deliveryType"
+        name="deliv-type"
+        (change)="(deliv)"
+        #deliv
+      >
+        <option name="personal" value="personal">Személyes</option>
+        <option value="delivery">Utánvét</option>
+        <option value="package-point">Csomagpont</option>
+      </select>
+      <ng-container *ngIf="deliv.value === 'package-point'">
+        <label for=""> Csomagpontok </label>
+        <select
+          [(ngModel)]="order._packagePoint"
+          name="package-point"
+          id="package-point"
+        >
+          <option value="Székesfehérvár, Budai út 44.">
+            Székesfehérvár, Budai út 44.
+          </option>
+          <option value="Polgárdi, Jókai utca 20.">
+            Polgárdi, Jókai utca 20.
+          </option>
+          <option value="Budapest, Nagymárton utca 34.">
+            Budapest, Nagymárton utca 34.
+          </option>
+        </select>
+      </ng-container>
+      <div>
+        <label for="payment-type">Fizetés módja - </label>
+        <label for="cash">Készpénz</label>
+        <input
+          [(ngModel)]="order._paymentType"
+          value="cash"
+          id="cash"
+          name="payment-type"
+          type="radio"
+        />
+        <label for="bank-card">Bankkártya</label>
+        <input
+          [(ngModel)]="order._paymentType"
+          value="bank-card"
+          id="bank-card"
+          name="payment-type"
+          type="radio"
+        />
+        <label for="transfer">Átutalás</label>
+        <input
+          [(ngModel)]="order._paymentType"
+          value="transfer"
+          id="transfer"
+          name="payment-type"
+          type="radio"
+        />
+      </div>
+      <div class="forwardBtnCont">
+        <button
+          (click)="isDelivDetails = false; isFinalizeOrder = true"
+          type="button"
+        >
+          Tovább
+        </button>
+      </div>
+    </fieldset>
+  </form>
+</div>
+
+<div *ngIf="isFinalizeOrder" class="orderContainer">
+  <form class="finalizeOrderForm">
+    <fieldset>
+      <legend>Rendelés véglegesítése</legend>
+      <div>
+        <h2>Termékek</h2>
+        <ng-container *ngFor="let product of basket">
+          <div *ngIf="product.name">
+            <h4>{{ product.name }}</h4>
+            <span *ngIf="product.price">{{ product.price }} Ft</span>
+            <p *ngIf="product.orderQuantity">{{ product.orderQuantity }} db</p>
+          </div>
+        </ng-container>
+        <h2>Szállítási cím</h2>
+        <div>
+          <p>{{ order._personalDetails.address }}</p>
+        </div>
+        <h2>Fizetés módja</h2>
+          <p *ngIf="order._paymentType === 'cash'">Készpénz</p>
+          <p *ngIf="order._paymentType === 'transfer'">Átutalás</p>
+          <p *ngIf="order._paymentType === 'bank-card'">Bankkártya</p>
+        <h2>Átvétel módja</h2>
+        <p *ngIf="order._deliveryType === 'delivery'">Utánvét</p>
+        <p *ngIf="order._deliveryType === 'personal'">Személyes</p>
+        <p *ngIf="order._deliveryType === 'package-point'">Csomagpont:
+        <span>{{order._packagePoint}}</span></p>
+      </div>
+      <button class="submitOrderButton" (click)="submitOrder()" type="button">Leadom a rendelést</button>
+    </fieldset>
+  </form>
 </div>

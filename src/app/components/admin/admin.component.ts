@@ -40,7 +40,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
         this.isEditMode = true;
         this.product = { ...data };
         this.product.price = +data.price;
-        this.product.quantity = +data.quantity;
+        this.product.available = +data.quantity;
       }
     });
   }

@@ -22,6 +22,8 @@
     "@ngrx/effects": "^17.1.1",
     "@ngrx/router-store": "^17.1.1",
     "@ngrx/store": "^17.1.1",
+    "bootstrap-icons": "^1.11.3",
+    "deepmerge": "^4.3.1",
     "firebase": "^10.10.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

@@ -18,17 +18,38 @@
       </div>
       <span *ngIf="product.price">{{ product.price }} Ft</span>
       <p>{{ product.description }}</p>
-      <p *ngIf="product.quantity">Elérhető: {{ product.quantity }} db</p>
-      <div>
-        <button (click)="editModeOn(product)" type="button">Módosítás</button>
+      <p *ngIf="product.available">Elérhető: {{ product.available }} db</p>
+      <div class="basketButtonContainer">
+        <div class="order-quantity-container">
+          <input
+            placeholder="Db"
+            class="order-quantity-input"
+            name="order-quantity"
+            [(ngModel)]="product.orderQuantity"
+            type="number"
+          />
+        </div>
         <button
-          class="deleteButton"
-          (click)="deleteProduct(product)"
+          (click)="toBasket(product)"
+          class="toBasketButton"
           type="button"
         >
-          Törlés
+          Kosárba <i class="bi bi-cart4"></i>
         </button>
       </div>
     </div>
   </ng-container>
 </div>
+
+<div [ngClass]="!isPutToBasket ? 'd-none' : ''" class="modal">
+  <button (click)="isPutToBasket = false" class="close-modal" type="button">
+    &times;
+  </button>
+  <h1>{{ product.name }}</h1>
+  <h3>{{ product.orderQuantity }} db</h3>
+  <p>Sikeresen kosarba helyezve!</p>
+  <button (click)="isPutToBasket = false" type="button">
+    Folytatom a vasarlast
+  </button>
+</div>
+<div [ngClass]="!isPutToBasket ? 'd-none' : ''" class="overlay"></div>

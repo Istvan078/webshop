@@ -4,12 +4,13 @@ export class Product {
   subcategory: {key: string, queryPar: string, subcat: string};
   featured: boolean;
   discount?: number;
+  orderQuantity?: number;
   constructor(
     public price: number = 0,
     public key: string = "",
     public description: string = "",
     public name: string = "",
-    public quantity: number = 0,
+    public available: number = 0,
   ) {
     this.number = 0
     this.subcategory = {key: "", queryPar: "", subcat: ""}

@@ -1,4 +1,6 @@
+
 <div class="mainContainer">
+  <button routerLink="/admin/orders" type="button">Rendelések</button>
   <div class="flexCol">
     <label for="">Termék neve</label>
     <input name="product-name" [(ngModel)]="product.name" type="text" />
@@ -36,7 +38,7 @@
     <label for="">Termék ára</label>
     <input name="product-name" [(ngModel)]="product.price" type="number" />
     <label for="">Termék darabszáma</label>
-    <input name="product-name" [(ngModel)]="product.quantity" type="number" />
+    <input name="product-name" [(ngModel)]="product.available" type="number" />
     <label for="">Termék képlinkje</label>
     <input name="product-name" [(ngModel)]="product.photoUrl" type="text" />
     <label for="">Termék leírása</label>

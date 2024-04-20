@@ -32,7 +32,7 @@ export class ProductsEffects {
           newProduct.name = val[1].name;
           newProduct.description = val[1].description;
           newProduct.price = val[1].price;
-          newProduct.quantity = val[1].quantity;
+          newProduct.available = val[1].available;
           newProduct.photoUrl = val[1].photoUrl
           newProduct.number = i;
           if(val[1].subcategory?.key)

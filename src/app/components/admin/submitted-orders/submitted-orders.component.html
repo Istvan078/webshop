@@ -1,0 +1,41 @@
+<div class="mainContainer">
+  <!-- <div *ngIf="isLoading" class="loadingSpinner">*</div>
+  <ng-template [ngIf]="error">
+    <div class="errorContainer">
+      {{ this.showErrorAlert() }}
+      <button (click)="clearError()" type="button">Rendben</button>
+    </div>
+  </ng-template> -->
+  <h2>Megrendelések</h2>
+  <ng-container *ngFor="let order of ordersCopy">
+    <div class="orders">
+      <h3 class="bold">{{order._personalDetails.surName + " " + order._personalDetails.firstName }}</h3>
+      <br>
+      <span class="bold">Szállítási cím: </span>
+      <span>{{ order._personalDetails.address }}</span>
+      <br>
+      <span class="bold">Email: </span>
+      <span>{{ order._personalDetails.email }}</span>
+      <br>
+        <span class="bold">Telefonszám: </span>
+      <span>{{ order._personalDetails.phoneNumber }}</span>
+        <br>
+
+      <span class="bold">Fizetés: </span>
+      <span>{{order._paymentType}}</span>
+      <br>
+      <span class="bold">Szállítás típusa: </span>
+      <span>{{order._deliveryType}}</span>
+
+
+      <h3 class="margin-t-b">Termékek</h3>
+      <ng-container *ngFor="let prod of order.products">
+          <div>
+              <span> {{ prod.name }} </span>
+              <span> {{ prod.orderQuantity }} Db</span>
+              <span> {{ prod.price }} Ft</span>
+          </div>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>

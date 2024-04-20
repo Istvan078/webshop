@@ -1,0 +1,76 @@
+.products {
+    margin-top: 40px;
+    position: relative;
+    text-align: center;
+    padding: 10px;
+    background: rgb(136, 208, 34, 0.5);
+    // background-image: var(--main-color);
+    box-shadow: 0px 0px 3px 5px rgb(194, 181, 181, 0.5);
+    margin-bottom: 10px;
+    margin-right: 5px;
+    margin-left: 5px;
+    width: 50%;
+    min-height: fit-content;
+    max-height: fit-content;
+    border-radius: 5px;
+
+    div{
+        margin-bottom: 10px;
+        display: flex;
+        gap: 5px;
+        justify-content: center;
+        align-items: center;
+
+        button {
+            background: red;
+            border: none;
+        }
+    }
+  }
+
+  .mainContainer {
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: center;
+    padding: 10px 10px 10px 0;
+    margin-top: 0;
+    margin-right: 10px;
+    // background-color: rgba(221, 207, 207,0.8);
+  }
+
+.orderContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.finalizeOrderForm {
+    text-align: center;
+
+}
+
+fieldset {
+    padding: 10px;
+}
+
+
+.header-1 {
+    margin-bottom: 10px;
+}
+
+.forwardBtnCont {
+    text-align: right;
+}
+
+.submitOrderButton {
+    background-color: rgb(7, 7, 199);
+    border: none;
+    box-shadow: 0 0 1px 2px white;
+}
+.submitOrderButton:hover {
+    background-color: rgb(15, 15, 75);
+}

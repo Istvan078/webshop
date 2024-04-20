@@ -77,6 +77,13 @@ export const productsReducer = createReducer(
     // const copy = { ...product };
     return { ...state, basket: [...state.basket, product] };
   }),
+  on(ProductsActions.removeFromBasket, (state, product) => {
+    return {
+      ...state,
+      basket: [...state.basket.filter((prod) => prod.key !== product.key)],
+    };
+  }),
+  on(ProductsActions.clearBasket, (state) => ({ ...state, basket: [] })),
   on(ProductsActions.clearError, (state) => ({
     ...state,
     error: '',

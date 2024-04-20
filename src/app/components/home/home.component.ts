@@ -6,6 +6,7 @@ import { Product } from '../../models/product.model';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { ConfigService } from '../../services/config.service';
+import deepmerge from 'deepmerge';
 
 @Component({
   selector: 'app-home',
@@ -23,6 +24,19 @@ export class HomeComponent implements OnDestroy, OnInit {
   isSearchOn: boolean = false;
   filteredProducts: Product[] = [];
   isPutToBasket: boolean = false;
+  filteredFeaturedProducts: Product[] = []
+  shownFeaturedProducts: Product[] =[]
+  index: number = 0
+  isLeftArrow: boolean = false
+  isRightArrow: boolean = true
+  icons: any[] = [
+    {key: 'firstCategory', value: 'bi-brush'},
+    {key: 'secondCategory', value: 'bi-laptop'},
+    {key: 'thirdCategory', value: 'bi-tree'},
+    {key: 'fourthCategory', value: 'bi-house'},
+    {key: 'fifthCategory', value: 'bi-hammer'},
+
+  ]
   constructor(
     private store: Store<fromApp.AppState>,
     private router: Router,
@@ -33,6 +47,7 @@ export class HomeComponent implements OnDestroy, OnInit {
     const productsArrSet = await this.init();
     console.log(productsArrSet);
     this.fadeIn();
+    this.filterFeaturedProducts()
   }
 
   init() {
@@ -60,11 +75,27 @@ export class HomeComponent implements OnDestroy, OnInit {
 
   fadeIn() {
     const products = document.getElementsByClassName('products');
-    let index = 0;
+     let index = 0;
     const interval = setInterval(() => {
       if (index < products.length) {
         products[index].classList.add('fade-in');
         index++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 500);
+  }
+
+  fadeInOnClick() {
+    const products = document.getElementsByClassName('products');
+    let index = 3;
+    const interval = setInterval(() => {
+      if (index === products.length) {
+        if(!products[0].classList.contains('fade-in'))
+          products[0].classList.add('fade-in')
+        if(!products[1].classList.contains('fade-in'))
+          products[1].classList.add('fade-in')
+        products[index-1].classList.add('fade-in');
       } else {
         clearInterval(interval);
       }
@@ -83,7 +114,49 @@ export class HomeComponent implements OnDestroy, OnInit {
         prod.description.toLowerCase().includes(this.searchStr.toLowerCase())
     );
     this.fadeIn();
-    console.log(this.products);
+  }
+
+  filterFeaturedProducts() {
+    this.filteredFeaturedProducts  = this.products.filter((prod) => prod.featured === true)
+    if(window.innerWidth > 500)
+    this.shownFeaturedProducts = this.filteredFeaturedProducts.slice(0, 3)
+    else this.shownFeaturedProducts = this.filteredFeaturedProducts.slice(0, 1)
+    this.shownFeaturedProducts = deepmerge(this.shownFeaturedProducts, [])
+    this.filteredFeaturedProducts = deepmerge(this.filteredFeaturedProducts, [])
+  }
+
+  toLeft() {
+    if(this.index > 0 && window.innerWidth > 500) {
+      this.isRightArrow = true
+      this.index--
+      this.shownFeaturedProducts = this.filteredFeaturedProducts.slice(this.index, this.index + 3)
+      this.fadeIn()
+    } else {
+      this.isRightArrow = true
+      this.index--
+      this.shownFeaturedProducts = this.filteredFeaturedProducts.slice(this.index, this.index + 1)
+      this.fadeIn()
+    }
+    if(this.index <= 0){
+      this.isLeftArrow = false
+    }
+  }
+
+  toRight() {
+    if(this.index < this.filteredFeaturedProducts.length - 3 && window.innerWidth > 500) {   
+      this.isLeftArrow = true
+      this.index++
+      if(this.index >= this.filteredFeaturedProducts.length - 3) this.isRightArrow = false
+      this.shownFeaturedProducts = this.filteredFeaturedProducts.slice(this.index,this.index + 3)
+      this.fadeInOnClick()
+    } else {
+      this.isLeftArrow = true
+      this.index++
+      if(this.index >= this.filteredFeaturedProducts.length - 1) this.isRightArrow = false
+      this.shownFeaturedProducts = this.filteredFeaturedProducts.slice(this.index, this.index + 1)
+      this.fadeIn()
+    }
+    
   }
 
   toBasket(product: Product) {

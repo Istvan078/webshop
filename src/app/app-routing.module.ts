@@ -5,6 +5,7 @@ import { ProductsComponent } from './components/products/sub-categories/products
 import { AdminComponent } from './components/admin/admin.component';
 import { SubCategoriesComponent } from './components/products/sub-categories/sub-categories.component';
 import { OrderComponent } from './components/order/order.component';
+import { SubmittedOrdersComponent } from './components/admin/submitted-orders/submitted-orders.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'subcategories/:cat', component: SubCategoriesComponent },
   { path: 'order', component: OrderComponent },
   { path: 'admin', component: AdminComponent },
+  { path: 'admin/orders', component: SubmittedOrdersComponent },
   { path: '**', component: HomeComponent },
 ];
 

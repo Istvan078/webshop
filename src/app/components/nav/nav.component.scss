@@ -20,9 +20,37 @@ nav {
   }
 }
 
+.cart-container {
+  position: fixed;
+  z-index: 2;
+  top: 12px;
+  right: 15px;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  i {
+    color: rgb(231, 153, 9);
+  }
+  span {
+    font-weight: bolder;
+    text-align: center;
+    font-size: 0.5rem;
+    position: absolute;
+    background: rgb(255, 255, 0);
+    border-radius: 50%;
+    width: 10px;
+    color: darkgreen;
+  }
+}
+
 @media screen and (max-width: 500px) {
   nav {
     max-width: 90%;
     font-size: 1rem;
   }
+  .cart-container {
+    font-size: 1rem;
+    top:5px
+  }
 }
+
+

@@ -2,5 +2,10 @@
   <a routerLink="">Kezdőlap</a>
   <a routerLink="subcategories">Termékek</a>
   <a routerLink="admin">Admin</a>
-  <a routerLink="order">Rendeles</a>
+  <a routerLink="order">Rendelés</a>
 </nav>
+
+<div routerLink="/order" class="cart-container">
+  <i class="bi bi-cart4"></i>
+  <span>{{numberOfProds}}</span>
+</div>
