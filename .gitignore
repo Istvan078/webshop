@@ -1,5 +1,9 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# Secrets
+/src/app/environments.ts
+functions/webshop0781-firebase-adminsdk-wri6p-4f551295b5.json
+
 # Compiled output
 /dist
 /tmp
