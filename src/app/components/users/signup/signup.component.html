@@ -1,8 +1,6 @@
-<div *ngIf="!emailOrGoogle" class="container-0">
-    <h2
-    >
-      Regisztráció
-    </h2>
+<div class="main-container">
+  <div *ngIf="!emailOrGoogle" class="container-0">
+    <h2>Regisztráció</h2>
   </div>
   <form
     #signupForm="ngForm"
@@ -12,12 +10,28 @@
     <div>
       <label for="email">Email</label>
       <input #email email ngModel type="email" name="email" />
-      <span *ngIf="signupForm.form.get('email')?.invalid && signupForm.form.get('email')?.touched">Nem megfelelő formátumú e-mail cím!</span>
+      <span
+        *ngIf="
+          signupForm.form.get('email')?.invalid &&
+          signupForm.form.get('email')?.touched
+        "
+        >Nem megfelelő formátumú e-mail cím!</span
+      >
     </div>
     <div>
       <label for="password">Jelszó</label>
       <input minlength="6" #password ngModel type="password" name="password" />
-      <span *ngIf="signupForm.form.get('password')?.invalid && signupForm.form.get('password')?.touched">A jelszó túl rövid!</span>
+      <span
+        *ngIf="
+          signupForm.form.get('password')?.invalid &&
+          signupForm.form.get('password')?.touched
+        "
+        >A jelszó túl rövid!</span
+      >
     </div>
   
-    <button [disabled]="!signupForm.valid" class="login-button" type="submit">Regisztráció</button>
+    <button [disabled]="!signupForm.valid" class="signup-button" type="submit">
+      Regisztráció
+    </button>
+  </form>
+</div>

@@ -45,6 +45,11 @@
   max-height: fit-content;
   border-radius: 5px;
   opacity: 0;
+
+  .under-prodpic-container {
+    max-height: 55px;
+    overflow: auto;
+  }
 }
 
 .loadingSpinner {

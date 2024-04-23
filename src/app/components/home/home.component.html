@@ -42,9 +42,11 @@
             [alt]="product.name"
             />
           </div>
-          <h4>{{ product.name }}</h4>
-          <span *ngIf="product.price">{{ product.price }} Ft</span>
-          <p>{{ product.description }}</p>
+          <div class="under-prodpic-container">
+            <h4>{{ product.name }}</h4>
+            <span *ngIf="product.price">{{ product.price }} Ft</span>
+            <p>{{ product.description }}</p>
+          </div>
           <p *ngIf="product.available">Elérhető: {{ product.available }} db</p>
           <div>
             <input placeholder="Db" class="order-quantity-input" name="order-quantity" [(ngModel)]="product.orderQuantity" type="number">

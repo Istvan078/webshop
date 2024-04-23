@@ -15,6 +15,10 @@ input {
   padding: 5px;
 }
 
+.addButton:hover {
+  background-color: rgb(3, 3, 246, 0.7);
+}
+
 .updateButton {
   background-color: rgb(198, 198, 34);
   color: white;
@@ -53,6 +57,23 @@ input {
 
 .fade {
   opacity: 0;
+}
+
+.claims-button {
+  position: absolute;
+  top: 50px;
+  left: 95px;
+  background: rgb(255, 174, 0);
+  border: none;
+  padding: 5px;
+}
+
+.claims-button:hover {
+  background: rgba(245, 196, 2, 0.7);
+}
+
+button {
+  color: white
 }
 
 // @starting-style {
