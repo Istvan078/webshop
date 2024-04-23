@@ -9,7 +9,7 @@
       <button (click)="clearError()" type="button">Rendben</button>
     </div>
   </ng-template> -->
-  <div class="products">
+  <div class="basket">
     <h2 class="header-1">Kosár tartalma <i class="bi bi-cart4"></i></h2>
     <ng-container *ngFor="let product of basket">
       <div *ngIf="product.name">
@@ -33,7 +33,7 @@
       <input [(ngModel)]="order.surName" name="surname" type="text" />
       <label for="">Keresztnév</label>
       <input [(ngModel)]="order.firstName" name="firstName" type="text" />
-      <div>
+      <div class="d-grid">
         <label for="">Telefonszám</label>
         <input
           [(ngModel)]="order._personalDetails.phoneNumber"
@@ -47,7 +47,7 @@
           type="text"
         />
       </div>
-      <div>
+      <div class="d-grid">
         <label for="address">Lakcím</label>
         <input
           [(ngModel)]="order._personalDetails.address"
@@ -69,9 +69,9 @@
 
 <div *ngIf="isDelivDetails" class="orderContainer">
   <form>
-    <fieldset>
+    <fieldset class="d-grid">
       <legend>Átvétel, fizetés módja</legend>
-      <label for="">Átvétel típusa </label>
+      <h4>Átvétel típusa </h4>
       <select
         [(ngModel)]="order._deliveryType"
         name="deliv-type"
@@ -101,31 +101,36 @@
         </select>
       </ng-container>
       <div>
-        <label for="payment-type">Fizetés módja - </label>
-        <label for="cash">Készpénz</label>
-        <input
-          [(ngModel)]="order._paymentType"
-          value="cash"
-          id="cash"
-          name="payment-type"
-          type="radio"
-        />
-        <label for="bank-card">Bankkártya</label>
-        <input
-          [(ngModel)]="order._paymentType"
-          value="bank-card"
-          id="bank-card"
-          name="payment-type"
-          type="radio"
-        />
-        <label for="transfer">Átutalás</label>
-        <input
-          [(ngModel)]="order._paymentType"
-          value="transfer"
-          id="transfer"
-          name="payment-type"
-          type="radio"
-        />
+        <h4>Fizetés módja</h4>
+        <div>
+          <label for="cash">Készpénz</label>
+          <input
+            [(ngModel)]="order._paymentType"
+            value="cash"
+            id="cash"
+            name="payment-type"
+            type="radio"
+          />
+        </div>
+          <div>
+            <label for="bank-card">Bankkártya</label>
+            <input
+              [(ngModel)]="order._paymentType"
+              value="bank-card"
+              id="bank-card"
+              name="payment-type"
+              type="radio"
+            />
+          </div>
+          <label for="transfer">Átutalás</label>
+          <input
+            [(ngModel)]="order._paymentType"
+            value="transfer"
+            id="transfer"
+            name="payment-type"
+            type="radio"
+          />
+        
       </div>
       <div class="forwardBtnCont">
         <button

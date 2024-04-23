@@ -4,6 +4,11 @@
   <button (click)="searchProduct()" type="button">Keresés <i class="bi bi-search"></i></button>
 </div>
 
+<div class="change-color-mode-container">
+  <button class="btn-dark-mode" (click)="changeToDarkMode()" type="button">Sötét mód</button>
+  <button class="btn-light-mode" (click)="changeToLightMode()" type="button">Világos mód</button>
+</div>
+
 <div class="categoriesContainer">
   <button
     [routerLink]="['/subcategories/' + category.key + '-' + category.link]"

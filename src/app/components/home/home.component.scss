@@ -45,7 +45,6 @@
   max-height: fit-content;
   border-radius: 5px;
   opacity: 0;
-  transition: opacity 1s ease-in;
 }
 
 .loadingSpinner {
@@ -59,10 +58,36 @@
   animation: loadingSpinner 1s linear infinite;
 }
 
+
+.change-color-mode-container{
+  display: grid;
+  position: absolute;
+  right: 7px;
+  top: 50px;
+  z-index: 0;
+}
+
+.btn-dark-mode {
+  background: black;
+}
+
+.btn-light-mode {
+  background: rgb(255, 251, 251);
+  color: black;
+}
+
 .order-quantity-input{
   width: 45px;
   text-align: center;
   margin-bottom: 7px;
+}
+
+.full-opacity {
+  opacity: 1;
+}
+
+.opacity-animation {
+  transition: opacity 1s ease-in;
 }
 
 button {
@@ -70,13 +95,13 @@ button {
   color: white;
 }
 
-button:first-child {
-  background: rgb(198, 118, 131, 0.7);
-}
+// button:first-child {
+//   background: rgb(198, 118, 131, 0.7);
+// }
 
-button:first-child:hover {
-  background: rgb(198, 118, 131);
-}
+// button:first-child:hover {
+//   background: rgb(198, 118, 131);
+// }
 
 .d-none {
   display: none;
@@ -156,12 +181,9 @@ button:first-child:hover {
 }
 
 
-.fade {
-  opacity: 0;
-}
-
 .fade-in {
   opacity: 1;
+  transition: opacity 1s ease-in;
 }
 
 .imgContainer {
@@ -180,7 +202,7 @@ img {
 
 .searchContainer {
   margin-left: 5px;
-  margin-top: 50px;
+  margin-top: 60px;
 
   button {
     background: blue;
@@ -201,6 +223,11 @@ img {
   }
   .products {
     width: 80%;
+  }
+  .change-color-mode-container{
+    display: flex;
+    left: 80px;
+    top:30px;
   }
   .left-arrow span{
     height: 50px;

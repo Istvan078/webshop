@@ -7,6 +7,7 @@ import * as ProductsActions from '../products/store/products.actions'
 import { Router } from '@angular/router';
 import { Order } from '../../models/order.model';
 import deepmerge from 'deepmerge';
+import { BaseService } from '../../services/base.service';
 
 @Component({
   selector: 'app-order',
@@ -18,15 +19,14 @@ export class OrderComponent implements OnInit {
   order: Order = new Order()
   isPersonalDetails: boolean = false;
   isDelivDetails: boolean = false;
-  isFinalizeOrder: boolean = false
-  constructor(private store: Store<fromApp.AppState>, private router: Router) {}
+  isFinalizeOrder: boolean = false;
+  constructor(private store: Store<fromApp.AppState>, private router: Router, private base: BaseService) {}
 
   ngOnInit(): void {
     this.store.select('products').subscribe((state) => {
       this.basket = state.basket;
       this.basket = deepmerge(this.basket, [])
       this.calcPrice()
-      console.log(this.basket);
     });
   }
 
@@ -44,6 +44,10 @@ export class OrderComponent implements OnInit {
 
 startOrder() {
   this.isPersonalDetails = true
+  setTimeout(() => {
+    if(this.base.isDarkMode) document.querySelectorAll('input').forEach((inp) => inp.classList.add('input-darkmode'))
+  }, 500);
+  
 }
 
 async submitOrder() {

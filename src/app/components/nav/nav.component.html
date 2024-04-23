@@ -1,8 +1,11 @@
 <nav>
   <a routerLink="">Kezdőlap</a>
   <a routerLink="subcategories">Termékek</a>
-  <a routerLink="admin">Admin</a>
-  <a routerLink="order">Rendelés</a>
+  <a *ngIf="!user?.email" routerLink="users/sign-up">Regisztráció</a>
+  <a *ngIf="!user?.email" routerLink="users/login">Bejelentkezés</a>
+  <a *ngIf="user?.claims?.admin" routerLink="admin">Admin</a>
+  <a *ngIf="user?.email" (click)="signOut()">Kijelentkezés</a>
+  <a *ngIf="numberOfProds" routerLink="order">Rendelés</a>
 </nav>
 
 <div routerLink="/order" class="cart-container">

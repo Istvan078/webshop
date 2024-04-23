@@ -68,7 +68,7 @@ input {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  transition: opacity 1s ease-in-out;
+  // transition: opacity 1s ease-in-out;
 }
 
 @starting-style {
@@ -111,4 +111,8 @@ input {
   line-height: 0.7rem;
   font-size: 1.7rem;
   transform: translate(350%, 0);
+}
+
+.d-grid{
+  display: grid;
 }

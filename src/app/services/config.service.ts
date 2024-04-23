@@ -67,11 +67,11 @@ export class ConfigService {
     fourthCategory: {
       key: 'fourthCategory',
       value: [
-        'Sepruk',
-        'Tisztitoszerek',
-        'Mosogatoszerek',
-        'Mososzerek',
-        'Felmosok',
+        'Seprűk',
+        'Tisztítószerek',
+        'Mosogatószerek',
+        'Mosószerek',
+        'Felmosók',
       ],
       queryPar: [
         'brooms',

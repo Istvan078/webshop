@@ -11,7 +11,6 @@ import * as ProductsActions from '../products/store/products.actions';
 import { Product } from '../../models/product.model';
 import { ActivatedRoute } from '@angular/router';
 import { ConfigService } from '../../services/config.service';
-import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
 
 @Component({
   selector: 'app-admin',
