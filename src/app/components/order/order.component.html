@@ -21,7 +21,9 @@
         </button>
       </div>
     </ng-container>
-    <button (click)="startOrder()" type="button">Megrendelés</button>
+    <button class="order-button" (click)="startOrder()" type="button">
+      Megrendelés
+    </button>
   </div>
 </div>
 
@@ -37,13 +39,14 @@
         <label for="">Telefonszám</label>
         <input
           [(ngModel)]="order._personalDetails.phoneNumber"
-          name="surname"
+          name="phoneNumber"
           type="text"
         />
         <label for="">E-mail</label>
         <input
+          [disabled]="user?.email"
           [(ngModel)]="order._personalDetails.email"
-          name="surname"
+          name="email"
           type="text"
         />
       </div>
@@ -71,7 +74,7 @@
   <form>
     <fieldset class="d-grid">
       <legend>Átvétel, fizetés módja</legend>
-      <h4>Átvétel típusa </h4>
+      <h4>Átvétel típusa</h4>
       <select
         [(ngModel)]="order._deliveryType"
         name="deliv-type"
@@ -112,25 +115,24 @@
             type="radio"
           />
         </div>
-          <div>
-            <label for="bank-card">Bankkártya</label>
-            <input
-              [(ngModel)]="order._paymentType"
-              value="bank-card"
-              id="bank-card"
-              name="payment-type"
-              type="radio"
-            />
-          </div>
-          <label for="transfer">Átutalás</label>
+        <div>
+          <label for="bank-card">Bankkártya</label>
           <input
             [(ngModel)]="order._paymentType"
-            value="transfer"
-            id="transfer"
+            value="bank-card"
+            id="bank-card"
             name="payment-type"
             type="radio"
           />
-        
+        </div>
+        <label for="transfer">Átutalás</label>
+        <input
+          [(ngModel)]="order._paymentType"
+          value="transfer"
+          id="transfer"
+          name="payment-type"
+          type="radio"
+        />
       </div>
       <div class="forwardBtnCont">
         <button
@@ -162,16 +164,21 @@
           <p>{{ order._personalDetails.address }}</p>
         </div>
         <h2>Fizetés módja</h2>
-          <p *ngIf="order._paymentType === 'cash'">Készpénz</p>
-          <p *ngIf="order._paymentType === 'transfer'">Átutalás</p>
-          <p *ngIf="order._paymentType === 'bank-card'">Bankkártya</p>
+        <p *ngIf="order._paymentType === 'cash'">Készpénz</p>
+        <p *ngIf="order._paymentType === 'transfer'">Átutalás</p>
+        <p *ngIf="order._paymentType === 'bank-card'">Bankkártya</p>
         <h2>Átvétel módja</h2>
         <p *ngIf="order._deliveryType === 'delivery'">Utánvét</p>
         <p *ngIf="order._deliveryType === 'personal'">Személyes</p>
-        <p *ngIf="order._deliveryType === 'package-point'">Csomagpont:
-        <span>{{order._packagePoint}}</span></p>
+        <p *ngIf="order._deliveryType === 'package-point'">
+          Csomagpont: <span>{{ order._packagePoint }}</span>
+        </p>
       </div>
-      <button class="submitOrderButton" (click)="submitOrder()" type="button">Leadom a rendelést</button>
+      <div>
+        <button class="submitOrderButton" (click)="submitOrder()" type="button">
+          Leadom a rendelést
+        </button>
+      </div>
     </fieldset>
   </form>
 </div>

@@ -1,6 +1,7 @@
 <nav>
   <a routerLink="">Kezdőlap</a>
   <a routerLink="subcategories">Termékek</a>
+  <a routerLink="users/my-orders">Rendeleseim</a>
   <a *ngIf="!user?.email" routerLink="users/sign-up">Regisztráció</a>
   <a *ngIf="!user?.email" routerLink="users/login">Bejelentkezés</a>
   <a *ngIf="user?.claims?.admin" routerLink="admin">Admin</a>
@@ -10,5 +11,5 @@
 
 <div routerLink="/order" class="cart-container">
   <i class="bi bi-cart4"></i>
-  <span>{{numberOfProds}}</span>
+  <span>{{ numberOfProds }}</span>
 </div>

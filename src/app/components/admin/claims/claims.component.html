@@ -1,1 +1,37 @@
-<button style="margin-top: 50px;" (click)="setClaims()" type="button">Jogosultságok beállítása</button>
+<div class="main-container">
+    <div class="back-button-cont">
+        <button routerLink="/admin" type="button">Vissza</button>
+      </div>
+  <div class="title-cont">
+    <h3>Felhasznalok</h3>
+  </div>
+  <div class="user-container" *ngFor="let user of users">
+    <ng-container *ngIf="user?.uid && user?.claims">
+      <p class="m-b-sm m-t-sm"><b>E-mail:</b> {{ user.email }}</p>
+      <p><b>Jogosultságok:</b></p>
+      <div class="claims-cont">
+        <label>Alap: </label>
+        <input
+          [(ngModel)]="user.claims.basic"
+          type="checkbox"
+          name="basic-rights"
+          id="basic-rights"
+        />
+        <label> Admin: </label>
+        <input
+          [(ngModel)]="user.claims.admin"
+          type="checkbox"
+          name="admin-rights"
+          id="admin-rights"
+        />
+      </div>
+      <button
+        class="claims-change-btn"
+        (click)="setClaims(user.uid, user.claims)"
+        type="button"
+      >
+        Jogosultságok modositasa
+      </button>
+    </ng-container>
+  </div>
+</div>

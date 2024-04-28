@@ -3,15 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { initializeApp } from '@angular/fire/app';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as AuthActions from './auth.actions';
-import {
-  Observable,
-  catchError,
-  map,
-  of,
-  switchMap,
-  take,
-  tap,
-} from 'rxjs';
+import { Observable, catchError, map, of, switchMap, take, tap } from 'rxjs';
 import { User, getAuth } from '@angular/fire/auth';
 import { Environments } from '../../../environments';
 import { Router } from '@angular/router';
@@ -106,6 +98,20 @@ export class AuthEffects {
     );
   });
 
+  $getUsers = createEffect(() => {
+    return this.$actions.pipe(
+      ofType(AuthActions.getUsers),
+      switchMap(() => {
+        return this.getUsers().pipe(
+          take(1),
+          map((users) => {
+            return AuthActions.getUsersSuccess({ payload: users });
+          })
+        );
+      })
+    );
+  });
+
   $getClaims = createEffect(() => {
     return this.$actions.pipe(
       ofType(AuthActions.getAuthStateSuccess),
@@ -125,7 +131,7 @@ export class AuthEffects {
     return this.$actions.pipe(
       ofType(AuthActions.setClaims),
       switchMap(async (action) => {
-        await this.setCustomClaims(this.user.uid, action.payload);
+        await this.setCustomClaims(action.payload.uid, action.payload.claims);
         return AuthActions.getClaims();
       })
     );
@@ -157,9 +163,6 @@ export class AuthEffects {
         this.user.claims.admin
           ? this.router.navigate(['/admin'])
           : this.router.navigate(['']);
-        this.getUsers().subscribe((users: any) => {
-          console.log(users);
-        });
       } else {
         if (this.user.uid) {
           this.setCustomClaims(this.user.uid, this.defaultClaims);
@@ -224,7 +227,7 @@ export class AuthEffects {
   }
 
   getUsers(): Observable<[]> {
-    if (this.user.idToken) {
+    if (this.user?.idToken) {
       // let headers = new HttpHeaders().set('Authorization', this.user.idToken);
       return this.http.get<[]>(this.usersApiUrl + 'users', {
         headers: this.httpHeaders,

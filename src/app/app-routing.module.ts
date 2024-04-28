@@ -10,6 +10,7 @@ import { AdminLoginComponent } from './components/admin/admin-login/admin-login.
 import { LoginComponent } from './components/users/login/login.component';
 import { SignupComponent } from './components/users/signup/signup.component';
 import { ClaimsComponent } from './components/admin/claims/claims.component';
+import { MyOrdersComponent } from './components/users/my-orders/my-orders.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'order', component: OrderComponent },
   { path: 'users/sign-up', component: SignupComponent },
   { path: 'users/login', component: LoginComponent },
+  { path: 'users/my-orders', component: MyOrdersComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'admin/login', component: AdminLoginComponent },
   { path: 'admin/claims', component: ClaimsComponent },

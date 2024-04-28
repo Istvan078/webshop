@@ -113,6 +113,13 @@ input {
   transform: translate(350%, 0);
 }
 
-.d-grid{
+.d-grid {
   display: grid;
+}
+
+.m-b-sm {
+  margin-bottom: 10px;
+}
+.m-t-sm {
+  margin-top: 10px;
 }

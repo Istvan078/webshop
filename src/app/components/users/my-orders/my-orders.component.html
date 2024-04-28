@@ -1,19 +1,15 @@
 <div class="mainContainer">
-  <div class="back-button-cont">
-    <button routerLink="/admin" type="button">Vissza</button>
-  </div>
   <!-- <div *ngIf="isLoading" class="loadingSpinner">*</div>
-  <ng-template [ngIf]="error">
-    <div class="errorContainer">
-      {{ this.showErrorAlert() }}
-      <button (click)="clearError()" type="button">Rendben</button>
-    </div>
-  </ng-template> -->
-  <h2>Megrendelések</h2>
+    <ng-template [ngIf]="error">
+      <div class="errorContainer">
+        {{ this.showErrorAlert() }}
+        <button (click)="clearError()" type="button">Rendben</button>
+      </div>
+    </ng-template> -->
+  <h2>Megrendeléseim</h2>
   <ng-container *ngFor="let order of ordersCopy">
     <div class="orders">
       <span class="date">{{ order.orderDate }}</span>
-      <span class="order-number">{{ order.orderNumber }}</span>
       <h3 class="bold">
         {{
           order._personalDetails.surName +

@@ -28,6 +28,7 @@ import { AuthEffects } from './components/admin/store/auth.effects';
 import { LoginComponent } from './components/users/login/login.component';
 import { SignupComponent } from './components/users/signup/signup.component';
 import { ClaimsComponent } from './components/admin/claims/claims.component';
+import { MyOrdersComponent } from './components/users/my-orders/my-orders.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { ClaimsComponent } from './components/admin/claims/claims.component';
     LoginComponent,
     SignupComponent,
     ClaimsComponent,
+    MyOrdersComponent,
   ],
   imports: [
     BrowserModule,

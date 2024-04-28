@@ -13,15 +13,17 @@ const USER_REGISTERED_SUCCESSFULLY = '[AUTH] User Registration Successful';
 const SET_CLAIMS = '[AUTH] Set Claims';
 const GET_CLAIMS = '[AUTH] Get Claims';
 const GET_CLAIMS_SUCCESS = '[AUTH] Get Claims Success';
+const GET_USERS = '[AUTH] Get Users';
+const GET_USERS_SUCCESS = '[AUTH] Get Users Success';
 
 export const registerUser = createAction(
   REGISTER_USER,
   props<{ payload: Login }>()
 );
 export const userRegisteredSuccessfully = createAction(
-    USER_REGISTERED_SUCCESSFULLY,
-    props<{ payload: any }>()
-  );
+  USER_REGISTERED_SUCCESSFULLY,
+  props<{ payload: any }>()
+);
 export const login = createAction(LOGIN, props<{ payload: Login }>());
 export const loginFailed = createAction(LOGIN_FAILED);
 export const getAuthState = createAction(GET_AUTH_STATE);
@@ -34,9 +36,14 @@ export const userAuthentication = createAction(
   props<{ payload: any }>()
 );
 export const userAuthenticationSuccess = createAction(
-    USER_AUTHENTICATION_SUCCESS,
-    props<{ payload: any }>()
-  );
+  USER_AUTHENTICATION_SUCCESS,
+  props<{ payload: any }>()
+);
+export const getUsers = createAction(GET_USERS);
+export const getUsersSuccess = createAction(
+  GET_USERS_SUCCESS,
+  props<{ payload: any[] }>()
+);
 export const setClaims = createAction(SET_CLAIMS, props<{ payload: any }>());
 export const getClaims = createAction(GET_CLAIMS);
 export const getClaimsSuccess = createAction(

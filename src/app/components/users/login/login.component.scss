@@ -13,6 +13,10 @@
   }
 }
 
+.invalid-form-data {
+  color: rgb(165, 13, 13);
+}
+
 .container-0 {
   h2 {
     width: max-content;
@@ -44,8 +48,9 @@
   margin-top: 0;
   width: max-content;
   background: rgb(11, 11, 139);
-  border: 2px solid white;
   color: white;
+  border: none;
+  padding: 5px;
 }
 
 .login-button:hover {
