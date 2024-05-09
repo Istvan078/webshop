@@ -43,10 +43,8 @@ export class ClaimsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.store.dispatch(AuthActions.getUsers());
     this.authSub = this.store.select('auth').subscribe((state) => {
-      console.log(state.user);
       this.user = state.user;
       this.users = state.users;
-      console.log(state.users);
     });
   }
 

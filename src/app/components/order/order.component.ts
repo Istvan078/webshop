@@ -55,7 +55,6 @@ export class OrderComponent implements OnInit, OnDestroy {
       if (lastOrder?.orderNumber)
         this.order.orderNumber = lastOrder.orderNumber;
       if (this.user) this.order._personalDetails.email = this.user.email;
-      console.log(this.order);
     });
   }
 

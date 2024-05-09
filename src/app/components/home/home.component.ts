@@ -30,13 +30,7 @@ export class HomeComponent implements OnDestroy, OnInit {
   index: number = 0;
   isLeftArrow: boolean = false;
   isRightArrow: boolean = true;
-  icons: any[] = [
-    { key: 'firstCategory', value: 'bi-brush' },
-    { key: 'secondCategory', value: 'bi-laptop' },
-    { key: 'thirdCategory', value: 'bi-tree' },
-    { key: 'fourthCategory', value: 'bi-house' },
-    { key: 'fifthCategory', value: 'bi-hammer' },
-  ];
+  icons!: any[];
   constructor(
     private store: Store<fromApp.AppState>,
     private router: Router,
@@ -52,12 +46,12 @@ export class HomeComponent implements OnDestroy, OnInit {
   }
 
   init() {
+    this.icons = this.config.getIcons();
     this.getCategories();
     return new Promise((res) => {
       this.productsStoreSub = this.store
         .select('products')
         .subscribe((productsState) => {
-          console.log(productsState.basket);
           if (productsState.products.length) {
             this.products = productsState.products;
             res('****TERMEKEK TOMB BEALLITVA****');
@@ -75,19 +69,21 @@ export class HomeComponent implements OnDestroy, OnInit {
   }
 
   changeToDarkMode() {
-    document.body.style.background = 'rgba(0, 0, 0, 0.8)'
-    const inputs = document.querySelectorAll('input')
-    inputs.forEach((inp) => inp.style.color = 'white')
-    this.base.colorModesSubject.next(true)
+    document.body.style.background = 'rgba(0, 0, 0, 0.5)';
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach((inp) => (inp.style.color = 'white'));
+    this.base.colorModesSubject.next(true);
   }
 
   changeToLightMode() {
-    const pageColor = getComputedStyle(document.documentElement).getPropertyValue('--page-color')
-    document.body.style.background = pageColor
-    document.body.style.color = ''
-    const inputs = document.querySelectorAll('input')
-    inputs.forEach((inp) => inp.style.color = '')
-    this.base.colorModesSubject.next(false)
+    const pageColor = getComputedStyle(
+      document.documentElement
+    ).getPropertyValue('--page-color');
+    document.body.style.background = pageColor;
+    document.body.style.color = '';
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach((inp) => (inp.style.color = ''));
+    this.base.colorModesSubject.next(false);
   }
 
   fadeIn() {
@@ -138,8 +134,10 @@ export class HomeComponent implements OnDestroy, OnInit {
     this.isSearchOn = true;
     this.filteredProducts = this.products.filter(
       (prod) =>
-        prod.name.toLowerCase().includes(this.searchStr.toLowerCase()) ||
-        prod.description.toLowerCase().includes(this.searchStr.toLowerCase())
+        prod.name.toLowerCase().includes(this.searchStr.toLowerCase().trim()) ||
+        prod.description
+          .toLowerCase()
+          .includes(this.searchStr.toLowerCase().trim())
     );
     this.fadeIn();
   }
@@ -212,7 +210,6 @@ export class HomeComponent implements OnDestroy, OnInit {
     this.isPutToBasket = true;
     this.product = product;
     document.addEventListener('keydown', (e) => {
-      console.log(e, 'gombnyomas tortent');
       if (e.key === 'Escape') this.isPutToBasket = false;
     });
     this.store.dispatch(ProductsActions.addToBasket(product));

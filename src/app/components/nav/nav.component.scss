@@ -1,4 +1,4 @@
-nav {
+.desktop-nav {
   position: fixed;
   z-index: 2;
   max-width: 100%;
@@ -20,7 +20,28 @@ nav {
   }
 }
 
+.mobile-nav-container {
+  margin-left: 4px;
+  display: flex;
+  flex-direction: column;
+  a {
+    transition: transform 2s ease;
+    // color: var(--nav-items-color);
+    color: black;
+    padding: 5px;
+    border-radius: 3px 0 0 3px;
+  }
+  a:hover {
+    background: var(--nav-hover-color);
+  }
+}
+
+.mobile-nav {
+  display: none;
+}
+
 .cart-container {
+  cursor: pointer;
   position: fixed;
   z-index: 2;
   top: 12px;
@@ -28,12 +49,13 @@ nav {
   font-size: 1.5rem;
   border-radius: 5px;
   i {
+    font-size: 1.8rem;
     color: rgb(231, 153, 9);
   }
   span {
     font-weight: bolder;
     text-align: center;
-    font-size: 0.5rem;
+    font-size: 0.8rem;
     position: absolute;
     background: rgb(255, 255, 0);
     border-radius: 50%;
@@ -42,15 +64,44 @@ nav {
   }
 }
 
+.line {
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  width: 50px;
+  height: 5px;
+  background: black;
+  transition: transform 3s ease;
+}
+
+.hamb-opened-1 {
+  transform: rotateZ(50deg) translateX(22px) translateY(-10px);
+}
+.hamb-opened-2 {
+  display: none;
+}
+.hamb-opened-3 {
+  transform: rotateZ(-50deg) translateX(-2px) translateY(-10px);
+  margin-bottom: 20px;
+}
+
 @media screen and (max-width: 500px) {
-  nav {
+  .desktop-nav {
     max-width: 90%;
     font-size: 1rem;
   }
   .cart-container {
     font-size: 1rem;
-    top:5px
+    top: 13px;
   }
 }
 
-
+@media screen and (max-width: 439px) {
+  .desktop-nav {
+    display: none;
+  }
+  .mobile-nav {
+    display: block;
+    margin-top: 20px;
+  }
+}

@@ -21,30 +21,42 @@
         </button>
       </div>
     </ng-container>
-    <button class="order-button" (click)="startOrder()" type="button">
+    <button
+      *ngIf="basket.length"
+      class="order-button"
+      (click)="startOrder()"
+      type="button"
+    >
       Megrendelés
     </button>
   </div>
 </div>
 
 <div *ngIf="isPersonalDetails" class="orderContainer">
-  <form>
+  <form #form="ngForm">
     <fieldset>
       <legend>Megrendelő adatai</legend>
       <label for="">Vezetéknév</label>
-      <input [(ngModel)]="order.surName" name="surname" type="text" />
+      <input required [(ngModel)]="order.surName" name="surname" type="text" />
       <label for="">Keresztnév</label>
-      <input [(ngModel)]="order.firstName" name="firstName" type="text" />
+      <input
+        required
+        [(ngModel)]="order.firstName"
+        name="firstName"
+        type="text"
+      />
       <div class="d-grid">
         <label for="">Telefonszám</label>
         <input
           [(ngModel)]="order._personalDetails.phoneNumber"
+          required
           name="phoneNumber"
           type="text"
         />
         <label for="">E-mail</label>
         <input
           [disabled]="user?.email"
+          required
           [(ngModel)]="order._personalDetails.email"
           name="email"
           type="text"
@@ -53,6 +65,7 @@
       <div class="d-grid">
         <label for="address">Lakcím</label>
         <input
+          required
           [(ngModel)]="order._personalDetails.address"
           name="address"
           type="text"
@@ -62,6 +75,7 @@
         <button
           (click)="isPersonalDetails = false; isDelivDetails = true"
           type="button"
+          [disabled]="!form.valid"
         >
           Tovább
         </button>
@@ -71,11 +85,12 @@
 </div>
 
 <div *ngIf="isDelivDetails" class="orderContainer">
-  <form>
+  <form #form="ngForm">
     <fieldset class="d-grid">
       <legend>Átvétel, fizetés módja</legend>
       <h4>Átvétel típusa</h4>
       <select
+        required
         [(ngModel)]="order._deliveryType"
         name="deliv-type"
         (change)="(deliv)"
@@ -88,6 +103,7 @@
       <ng-container *ngIf="deliv.value === 'package-point'">
         <label for=""> Csomagpontok </label>
         <select
+          required
           [(ngModel)]="order._packagePoint"
           name="package-point"
           id="package-point"
@@ -113,6 +129,7 @@
             id="cash"
             name="payment-type"
             type="radio"
+            required
           />
         </div>
         <div>
@@ -123,6 +140,7 @@
             id="bank-card"
             name="payment-type"
             type="radio"
+            required
           />
         </div>
         <label for="transfer">Átutalás</label>
@@ -132,10 +150,12 @@
           id="transfer"
           name="payment-type"
           type="radio"
+          required
         />
       </div>
       <div class="forwardBtnCont">
         <button
+          [disabled]="!form.valid"
           (click)="isDelivDetails = false; isFinalizeOrder = true"
           type="button"
         >

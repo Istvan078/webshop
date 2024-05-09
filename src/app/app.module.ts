@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProductsComponent } from './components/products/sub-categories/products/products.component';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
@@ -49,10 +50,14 @@ import { MyOrdersComponent } from './components/users/my-orders/my-orders.compon
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     StoreModule.forRoot(appReducer, {
-      runtimeChecks: { strictActionImmutability: false, strictStateImmutability: false },
+      runtimeChecks: {
+        strictActionImmutability: false,
+        strictStateImmutability: false,
+      },
     }),
     EffectsModule.forRoot([ProductsEffects, OrderEffects, AuthEffects]),
     StoreDevtoolsModule.instrument({ logOnly: Environments.production }),

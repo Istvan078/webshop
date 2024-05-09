@@ -33,16 +33,15 @@ export class ProductsEffects {
           newProduct.description = val[1].description;
           newProduct.price = val[1].price;
           newProduct.available = val[1].available;
-          newProduct.photoUrl = val[1].photoUrl
+          newProduct.photoUrl = val[1].photoUrl;
           newProduct.number = i;
-          if(val[1].subcategory?.key)
-          newProduct.subcategory = val[1].subcategory
-          newProduct.featured = val[1].featured
-          newProduct.discount = val[1].discount
+          if (val[1].subcategory?.key)
+            newProduct.subcategory = val[1].subcategory;
+          newProduct.featured = val[1].featured;
+          newProduct.discount = val[1].discount;
           // return arr.push({ ...val[1], key: val[0] });
           return arr.push(newProduct);
         });
-        console.log(arr);
       })
       .then(() => action({ products: arr }))
       .catch((err) => {
@@ -66,35 +65,36 @@ export class ProductsEffects {
     return this.actions$.pipe(
       ofType(ProductActions.GET_PRODUCT),
       switchMap((prods: any) => {
-        console.log(prods);
         return this.getProducts(ProductActions.GetProductSuccess);
       }),
       catchError((error) => {
         error.message = 'Nincs engedélyed az adatok megtekintéséhez!';
-        console.log(error);
         return of(ProductActions.GetProductsFail({ payload: error.message }));
       })
     );
   });
 
-  editModeOn$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(ProductActions.EDIT_MODE_ON),
-      tap((prod:any) => {
-        console.log(prod)
-        setTimeout(() => {
-          this.router.navigate([`products-edit`],{queryParams: prod})
-        }, 1000);
-      })
-    )
-  }, {dispatch: false})
+  editModeOn$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(ProductActions.EDIT_MODE_ON),
+        tap((prod: any) => {
+          console.log(prod);
+          setTimeout(() => {
+            this.router.navigate([`products-edit`], { queryParams: prod });
+          }, 1000);
+        })
+      );
+    },
+    { dispatch: false }
+  );
 
   updateProduct$ = createEffect(
     () => {
       return this.actions$.pipe(
         ofType(ProductActions.UPDATE_PRODUCT),
         tap((prod: any) => {
-          console.log(prod.product)
+          console.log(prod.product);
           this.productsRef
             .update(prod.product.key, prod.product)
             .then(() => this.router.navigate(['products']));

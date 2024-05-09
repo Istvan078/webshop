@@ -6,11 +6,11 @@
         <button (click)="clearError()" type="button">Rendben</button>
       </div>
     </ng-template> -->
-  <h2>Megrendeléseim</h2>
+  <h2 style="width: 100%; text-align: center">Megrendeléseim</h2>
   <ng-container *ngFor="let order of ordersCopy">
     <div class="orders">
       <span class="date">{{ order.orderDate }}</span>
-      <h3 class="bold">
+      <h3 style="display: inline-block" class="bold orderer-name">
         {{
           order._personalDetails.surName +
             " " +

@@ -1,12 +1,18 @@
 <div class="searchContainer">
   <label for="">Termék keresése</label>
   <input [(ngModel)]="searchStr" name="searchInput" type="text" />
-  <button (click)="searchProduct()" type="button">Keresés <i class="bi bi-search"></i></button>
+  <button (click)="searchProduct()" type="button">
+    Keresés <i class="bi bi-search"></i>
+  </button>
 </div>
 
 <div class="change-color-mode-container">
-  <button class="btn-dark-mode" (click)="changeToDarkMode()" type="button">Sötét mód</button>
-  <button class="btn-light-mode" (click)="changeToLightMode()" type="button">Világos mód</button>
+  <button class="btn-dark-mode" (click)="changeToDarkMode()" type="button">
+    Sötét mód
+  </button>
+  <button class="btn-light-mode" (click)="changeToLightMode()" type="button">
+    Világos mód
+  </button>
 </div>
 
 <div class="categoriesContainer">
@@ -14,7 +20,10 @@
     [routerLink]="['/subcategories/' + category.key + '-' + category.link]"
     *ngFor="let category of categories"
     type="button"
-  > <ng-container *ngFor="let icon of icons"><i *ngIf="category.key === icon.key" class="bi {{icon.value}}"></i></ng-container>
+  >
+    <ng-container *ngFor="let icon of icons"
+      ><i *ngIf="category.key === icon.key" class="bi {{ icon.value }}"></i
+    ></ng-container>
     {{ category.value }}
   </button>
 </div>
@@ -30,16 +39,18 @@
         <button (click)="clearError()" type="button">Rendben</button>
       </div>
     </ng-template>
-    <div class="left-arrow"><span *ngIf="isLeftArrow" (click)="toLeft()"><</span></div>
+    <div class="left-arrow">
+      <span *ngIf="isLeftArrow" (click)="toLeft()"><</span>
+    </div>
     <ng-container *ngFor="let product of shownFeaturedProducts">
       <ng-container *ngIf="product.featured && product.discount">
         <div class="products">
           <h5>Akció: {{ product.discount }}%</h5>
           <div class="imgContainer">
             <img
-            *ngIf="product.photoUrl"
-            [src]="product.photoUrl"
-            [alt]="product.name"
+              *ngIf="product.photoUrl"
+              [src]="product.photoUrl"
+              [alt]="product.name"
             />
           </div>
           <div class="under-prodpic-container">
@@ -49,24 +60,31 @@
           </div>
           <p *ngIf="product.available">Elérhető: {{ product.available }} db</p>
           <div>
-            <input placeholder="Db" class="order-quantity-input" name="order-quantity" [(ngModel)]="product.orderQuantity" type="number">
+            <input
+              placeholder="Db"
+              class="order-quantity-input"
+              name="order-quantity"
+              [(ngModel)]="product.orderQuantity"
+              type="number"
+              min="1"
+            />
           </div>
           <button
             class="toBasketButton"
             (click)="toBasket(product)"
             type="button"
-          > 
+          >
             Kosárba
             <i class="bi bi-cart4"></i>
           </button>
         </div>
       </ng-container>
     </ng-container>
-    <div class="right-arrow"><span *ngIf="isRightArrow" (click)="toRight()">></span></div>
+    <div class="right-arrow">
+      <span *ngIf="isRightArrow" (click)="toRight()">></span>
+    </div>
   </div>
-
 </div>
-
 
 <div *ngIf="isSearchOn" class="mainContainer">
   <div *ngIf="isLoading" class="loadingSpinner">*</div>
@@ -95,14 +113,16 @@
 </div>
 
 <div [ngClass]="!isPutToBasket ? 'd-none' : ''" class="modal">
-  <button (click)="isPutToBasket = false" class="close-modal" type="button">
-    &times;
-  </button>
+  <div class="close-modal-container">
+    <button (click)="isPutToBasket = false" class="close-modal" type="button">
+      &times;
+    </button>
+  </div>
   <h1>{{ product.name }}</h1>
   <h3>{{ product.orderQuantity }} db</h3>
-  <p>Sikeresen kosarba helyezve!</p>
-  <button (click)="isPutToBasket = false" type="button">
-    Folytatom a vasarlast
+  <p>Sikeresen kosárba helyezve!</p>
+  <button class="modal-button" (click)="isPutToBasket = false" type="button">
+    Folytatom a vásárlást
   </button>
 </div>
 <div [ngClass]="!isPutToBasket ? 'd-none' : ''" class="overlay"></div>

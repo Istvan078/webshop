@@ -4,7 +4,7 @@ import * as AppState from '../../../store/app.reducer';
 import { Product } from '../../../models/product.model';
 import { Order } from '../../../models/order.model';
 import deepmerge from 'deepmerge';
-import * as OrderActions from '../../order/store/order.actions'
+import * as OrderActions from '../../order/store/order.actions';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -17,15 +17,15 @@ export class SubmittedOrdersComponent implements OnInit, OnDestroy {
   productsCopy: Product[] = [];
   orders: Order[] = [];
   ordersCopy: Order[] = [];
-  areProductsFiltered: boolean = false
-  ordersSub!: Subscription
-  productsSub!: Subscription
+  areProductsFiltered: boolean = false;
+  ordersSub!: Subscription;
+  productsSub!: Subscription;
   constructor(private store: Store<AppState.AppState>) {}
 
   ngOnInit(): void {
-    this.init()
+    this.init();
     new Promise((res) => {
-     this.productsSub = this.store.select('products').subscribe((state) => {
+      this.productsSub = this.store.select('products').subscribe((state) => {
         this.products = state.products;
         res('***TERMÉKEK BEÁLLÍTVA***');
       });
@@ -33,14 +33,15 @@ export class SubmittedOrdersComponent implements OnInit, OnDestroy {
       console.log(res);
       this.ordersSub = this.store.select('orders').subscribe((state) => {
         this.orders = state.orders;
-        if (this.orders.length && !this.areProductsFiltered) this.filterProducts();
+        if (this.orders.length && !this.areProductsFiltered)
+          this.filterProducts();
         console.log('***RENDELÉSEK BEÁLLÍTVA***');
       });
     });
   }
 
   init() {
-    this.store.dispatch(OrderActions.getOrders())
+    this.store.dispatch(OrderActions.getOrders());
   }
 
   filterProducts() {
@@ -53,15 +54,14 @@ export class SubmittedOrdersComponent implements OnInit, OnDestroy {
         if (ord.productsKeys.includes(prod.key))
           ord.products.forEach((prd) => {
             if (prd.key === prod.key) prd.name = prod.name;
-            console.log(prd);
           });
       });
     });
-    this.areProductsFiltered = true
+    this.areProductsFiltered = true;
   }
 
   ngOnDestroy(): void {
-    if(this.productsSub) this.productsSub.unsubscribe()
-    if(this.ordersSub) this.ordersSub.unsubscribe()
+    if (this.productsSub) this.productsSub.unsubscribe();
+    if (this.ordersSub) this.ordersSub.unsubscribe();
   }
 }

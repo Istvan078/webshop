@@ -25,9 +25,9 @@
   border-radius: 5px;
   .date {
     position: absolute;
-    top: 5px;
-    left: 5px;
     font-style: italic;
+    left: 5px;
+    top: 5px;
   }
 }
 
@@ -52,4 +52,16 @@
 
 .margin-t-b {
   margin: 10px 0 10px 0;
+}
+@media screen and (max-width: 400px) {
+  .date {
+    position: relative;
+    display: inline-block;
+    font-style: italic;
+    transform: translateX(0px) translateY(0px);
+  }
+  .orderer-name {
+    margin-top: 15px;
+    transform: translateX(-20px);
+  }
 }

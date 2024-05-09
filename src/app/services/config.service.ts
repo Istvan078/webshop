@@ -101,6 +101,14 @@ export class ConfigService {
     },
   };
 
+  icons: any[] = [
+    { key: 'firstCategory', value: 'bi-brush' },
+    { key: 'secondCategory', value: 'bi-laptop' },
+    { key: 'thirdCategory', value: 'bi-tree' },
+    { key: 'fourthCategory', value: 'bi-house' },
+    { key: 'fifthCategory', value: 'bi-hammer' },
+  ];
+
   constructor() {}
 
   getCategories() {
@@ -109,5 +117,9 @@ export class ConfigService {
 
   getSubCategories() {
     return this.subCategories;
+  }
+
+  getIcons() {
+    return this.icons;
   }
 }

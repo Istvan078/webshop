@@ -95,9 +95,7 @@ export class ProductsComponent implements OnDestroy, OnInit {
   toBasket(product: Product) {
     this.isPutToBasket = true;
     this.product = product;
-    console.log(this.product);
     document.addEventListener('keydown', (e) => {
-      console.log(e, 'gombnyomas tortent');
       if (e.key === 'Escape') this.isPutToBasket = false;
     });
     this.store.dispatch(ProductsActions.addToBasket(product));

@@ -26,7 +26,6 @@ export const productsReducer = createReducer(
     return { ...state, loading: false, products: [], error: action.payload };
   }),
   on(ProductsActions.GetProductSuccess, (state, action) => {
-    console.log([...state.products, ...action.products]);
     console.log('Sikeres termékek lekérés');
     return {
       ...state,

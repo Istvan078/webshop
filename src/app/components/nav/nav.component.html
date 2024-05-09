@@ -1,13 +1,29 @@
-<nav>
+<nav class="desktop-nav">
   <a routerLink="">Kezdőlap</a>
   <a routerLink="subcategories">Termékek</a>
-  <a routerLink="users/my-orders">Rendeleseim</a>
+  <a *ngIf="numberOfProds" routerLink="order">Kosár</a>
+  <a *ngIf="user?.email" routerLink="users/my-orders">Rendeléseim</a>
   <a *ngIf="!user?.email" routerLink="users/sign-up">Regisztráció</a>
   <a *ngIf="!user?.email" routerLink="users/login">Bejelentkezés</a>
   <a *ngIf="user?.claims?.admin" routerLink="admin">Admin</a>
   <a *ngIf="user?.email" (click)="signOut()">Kijelentkezés</a>
-  <a *ngIf="numberOfProds" routerLink="order">Rendelés</a>
 </nav>
+
+<nav (click)="mobileNavOn()" class="mobile-nav">
+  <div [ngClass]="isMobileNav ? 'hamb-opened-1' : ''" class="line"></div>
+  <div [ngClass]="isMobileNav ? 'hamb-opened-2' : ''" class="line"></div>
+  <div [ngClass]="isMobileNav ? 'hamb-opened-3' : ''" class="line"></div>
+</nav>
+<div [@mobileNavState]="state" class="mobile-nav-container" *ngIf="isMobileNav">
+  <a routerLink="">Kezdőlap</a>
+  <a routerLink="subcategories">Termékek</a>
+  <a *ngIf="numberOfProds" routerLink="order">Kosár</a>
+  <a *ngIf="user?.email" routerLink="users/my-orders">Rendeléseim</a>
+  <a *ngIf="!user?.email" routerLink="users/sign-up">Regisztráció</a>
+  <a *ngIf="!user?.email" routerLink="users/login">Bejelentkezés</a>
+  <a *ngIf="user?.claims?.admin" routerLink="admin">Admin</a>
+  <a *ngIf="user?.email" (click)="signOut()">Kijelentkezés</a>
+</div>
 
 <div routerLink="/order" class="cart-container">
   <i class="bi bi-cart4"></i>

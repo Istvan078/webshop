@@ -79,7 +79,6 @@ export class AuthEffects {
       ofType(AuthActions.userAuthentication),
       switchMap(async () => {
         await this.getIdToken(this.user);
-        console.log(this.user);
         return AuthActions.userAuthenticationSuccess({ payload: this.user });
       })
     );
@@ -116,7 +115,6 @@ export class AuthEffects {
     return this.$actions.pipe(
       ofType(AuthActions.getAuthStateSuccess),
       switchMap((action) => {
-        console.log(action);
         return this.getClaims().pipe(
           take(1),
           map((claims) => {

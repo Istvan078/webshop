@@ -27,6 +27,7 @@
             name="order-quantity"
             [(ngModel)]="product.orderQuantity"
             type="number"
+            min="1"
           />
         </div>
         <button
@@ -42,14 +43,16 @@
 </div>
 
 <div [ngClass]="!isPutToBasket ? 'd-none' : ''" class="modal">
-  <button (click)="isPutToBasket = false" class="close-modal" type="button">
-    &times;
-  </button>
+  <div class="close-modal-container">
+    <button (click)="isPutToBasket = false" class="close-modal" type="button">
+      &times;
+    </button>
+  </div>
   <h1>{{ product.name }}</h1>
   <h3>{{ product.orderQuantity }} db</h3>
-  <p>Sikeresen kosarba helyezve!</p>
+  <p>Sikeresen kosárba helyezve!</p>
   <button (click)="isPutToBasket = false" type="button">
-    Folytatom a vasarlast
+    Folytatom a vásárlást
   </button>
 </div>
 <div [ngClass]="!isPutToBasket ? 'd-none' : ''" class="overlay"></div>

@@ -46,7 +46,7 @@ a:visited {
 button {
   border-color: rgb(51, 151, 33);
   background: green;
-  padding: 3px;
+  padding: 5px;
   margin: 3px;
   border-radius: 5px;
   color: wheat;
@@ -105,12 +105,24 @@ input {
 }
 
 .close-modal {
+  width: fit-content;
+  position: relative;
   color: white;
   background: transparent;
   border: none;
   line-height: 0.7rem;
   font-size: 1.7rem;
-  transform: translate(350%, 0);
+  // transform: translate(350%, 0);
+}
+.close-modal-container {
+  text-align: end;
+}
+
+.modal-button {
+  padding: 5px;
+}
+.modal h1 {
+  width: 99%;
 }
 
 .d-grid {
@@ -123,3 +135,8 @@ input {
 .m-t-sm {
   margin-top: 10px;
 }
+
+// @media screen and (max-width: 500px) {
+//   .close-modal {
+//   }
+// }
