@@ -44,7 +44,7 @@
   cursor: pointer;
   position: fixed;
   z-index: 2;
-  top: 12px;
+  top: 5px;
   right: 15px;
   font-size: 1.5rem;
   border-radius: 5px;
@@ -103,5 +103,16 @@
   .mobile-nav {
     display: block;
     margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .desktop-nav {
+    max-width: 90%;
+    font-size: 1rem;
+  }
+  .cart-container {
+    font-size: 1rem;
+    top: 6px;
   }
 }
